@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bakery Order Form</title>
+<style>
+  :root {
+    --aqua: #7fd8e8;
+    --aqua-dark: #2ba8bf;
+    --aqua-light: #e6f7fb;
+    --cream: #fffdf7;
+    --ink: #2b4a52;
+    --pink: #f7a8c4;
+    --mint: #a8e6cf;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    background: linear-gradient(160deg, var(--aqua-light), #fefefe 60%);
+    color: var(--ink);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .card {
+    background: var(--cream);
+    width: 100%;
+    max-width: 620px;
+    border-radius: 24px;
+    box-shadow: 0 12px 40px rgba(43, 168, 191, 0.18);
+    overflow: hidden;
+    border: 2px solid var(--aqua);
+  }
+  .header {
+    background: var(--aqua);
+    padding: 26px 28px;
+    text-align: center;
+    position: relative;
+  }
+  .header h1 {
+    font-size: 1.9rem;
+    letter-spacing: 0.5px;
+    color: #fff;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  }
+  .header p {
+    color: #eaf9fc;
+    margin-top: 6px;
+    font-size: 0.95rem;
+  }
+  .cupcake { font-size: 1.6rem; margin-top: 8px; display: inline-block; }
+  .dog-wrap {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    width: 68px;
+    height: 68px;
+  }
+  .dog-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.18);
+  }
+  .matcha { font-size: 1.15rem; margin-right: 2px; }
+  form { padding: 26px 28px 30px; }
+  .field { margin-bottom: 18px; }
+  label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 0.92rem;
+  }
+  label .req { color: var(--pink); }
+  input, select, textarea {
+    width: 100%;
+    padding: 11px 13px;
+    border: 2px solid #cfe9ef;
+    border-radius: 12px;
+    font-size: 0.98rem;
+    font-family: inherit;
+    color: var(--ink);
+    background: #fff;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--aqua-dark);
+    box-shadow: 0 0 0 3px rgba(127, 216, 232, 0.35);
+  }
+  textarea { resize: vertical; min-height: 70px; }
+  .row { display: flex; gap: 14px; }
+  .row .field { flex: 1; }
+  .note { font-size: 0.82rem; color: #6b939b; margin-top: 5px; }
+  button {
+    width: 100%;
+    padding: 14px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #fff;
+    background: var(--aqua-dark);
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    letter-spacing: 0.4px;
+    transition: background 0.15s, transform 0.05s;
+  }
+  button:hover { background: #2393aa; }
+  button:active { transform: scale(0.99); }
+  .footer {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #8aabb2;
+    margin-top: 16px;
+  }
+  .status {
+    text-align: center;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-top: 12px;
+    min-height: 20px;
+  }
+  .status.ok { color: #2f9e6e; }
+  .status.err { color: #d9534f; }
+  @media (max-width: 560px) {
+    .row { flex-direction: column; gap: 0; }
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="header">
+      <div class="dog-wrap">
+        <img class="dog-img" src="https://imgs.search.brave.com/XQXbgzBeB8RKJDToRdeeDiryldGHNKXfkGG2NjGk-aA/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wNjEv/ODk4LzU5MS9zbWFs/bC9hZG9yYWJsZS1i/aWNob24tZnJpc2Ut/ZG9nLWhlYWQtY2xp/cGFydC1mbHVmZnkt/cHVwLWFydC1mb3It/cGV0LWxvdmVycy1j/cmVhdGl2ZS1wcm9q/ZWN0cy12ZWN0b3Iu/anBn" alt="White bichon dog head">
+      </div>
+      <h1>Chub Chub Cafe</h1>
+      <p><span class="matcha" title="Matcha">🍵</span> Homemade with love 🍰</p>
+      <span class="cupcake">🧁</span>
+    </div>
+
+    <form id="orderForm">
+      <div class="field">
+        <label>Name <span class="req">*</span></label>
+        <input type="text" name="Name" required placeholder="Your name">
+      </div>
+
+      <div class="field">
+        <label>Phone Number <span class="req">*</span></label>
+        <input type="tel" name="Phone" required placeholder="(123) 456-7890">
+      </div>
+
+      <div class="field">
+        <label>When do you need it by? <span class="req">*</span></label>
+        <input type="datetime-local" name="Needed By" required>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label>Occasion</label>
+          <select name="Occasion">
+            <option value="">— Select —</option>
+            <option>Birthday</option>
+            <option>Wedding</option>
+            <option>Anniversary</option>
+            <option>Baby Shower</option>
+            <option>Holiday</option>
+            <option>Just Because</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Number of People <span class="req">*</span></label>
+          <input type="number" name="Number of People" min="1" required placeholder="e.g. 12">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Item(s) <span class="req">*</span></label>
+        <textarea name="Items" required placeholder="e.g. 1 dozen chocolate chip cookies, 1 vanilla birthday cake (10\")"></textarea>
+        <div class="note">Describe what you'd like, flavors, sizes, and quantities.</div>
+      </div>
+
+      <div class="field">
+        <label>Special Requests / Allergies</label>
+        <textarea name="Special Requests" placeholder="Allergies, dietary needs, custom message, etc."></textarea>
+      </div>
+
+      <button type="submit">Send Order 💌</button>
+      <div class="footer">We'll confirm your order by phone. Thank you! 🥐</div>
+      <div class="status" id="status" role="status"></div>
+    </form>
+  </div>
+
+<script>
+  // 👇 Paste your deployed Google Apps Script Web App URL here (after setup)
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxq2E7C3NzUb0V8bZo9g5q8VunEcGmdw2rx8ff8NbuJ0TZwOA1Hepk1DQU4_EFd47yU/exec";
+
+  document.getElementById("orderForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const f = e.target;
+    const get = (n) => (f.elements[n] ? f.elements[n].value.trim() : "");
+    const status = document.getElementById("status");
+    const btn = f.querySelector("button[type=submit]");
+
+    const data = {
+      name: get("Name"),
+      phone: get("Phone"),
+      neededBy: get("Needed By"),
+      occasion: get("Occasion"),
+      people: get("Number of People"),
+      items: get("Items"),
+      special: get("Special Requests")
+    };
+
+    btn.disabled = true;
+    btn.textContent = "Sending...";
+    status.textContent = "";
+    status.className = "status";
+
+    fetch(SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(data)
+    })
+      .then(function () {
+        btn.disabled = false;
+        btn.textContent = "Send Order 💌";
+        status.textContent = "Order sent! We'll be in touch soon. 🧁";
+        status.className = "status ok";
+        f.reset();
+      })
+      .catch(function () {
+        btn.disabled = false;
+        btn.textContent = "Send Order 💌";
+        status.textContent = "Something went wrong. Please try again.";
+        status.className = "status err";
+      });
+  });
+</script>
+</body>
+</html>
