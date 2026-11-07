@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bakery Order Form</title>
+<title>Chub Chub Cafe — Order Form</title>
 <style>
   :root {
     --aqua: #7fd8e8;
@@ -34,6 +34,21 @@
     overflow: hidden;
     border: 2px solid var(--aqua);
   }
+
+  /* ---------- Announcement banner ---------- */
+  .announce {
+    background: var(--ink);
+    color: #fff;
+    padding: 10px 16px;
+    text-align: center;
+    font-size: 0.88rem;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: 0.2px;
+  }
+  .announce .line + .line { margin-top: 2px; }
+  .announce .accent { color: var(--aqua); }
+
   .header {
     background: var(--aqua);
     padding: 26px 28px;
@@ -68,6 +83,7 @@
     box-shadow: 0 3px 8px rgba(0,0,0,0.18);
   }
   .matcha { font-size: 1.15rem; margin-right: 2px; }
+
   form { padding: 26px 28px 30px; }
   .field { margin-bottom: 18px; }
   label {
@@ -97,6 +113,77 @@
   .row { display: flex; gap: 14px; }
   .row .field { flex: 1; }
   .note { font-size: 0.82rem; color: #6b939b; margin-top: 5px; }
+
+  /* ---------- Item checklist ---------- */
+  .menu {
+    border: 2px solid #cfe9ef;
+    border-radius: 14px;
+    background: #fff;
+    overflow: hidden;
+  }
+  .menu-group + .menu-group { border-top: 1px solid #eaf5f8; }
+  .menu-group-title {
+    background: var(--aqua-light);
+    color: var(--aqua-dark);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    padding: 8px 13px;
+  }
+  .item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 13px;
+    cursor: pointer;
+    transition: background 0.12s;
+  }
+  .item + .item { border-top: 1px solid #f2f9fb; }
+  .item:hover { background: #f7fcfe; }
+  .item input[type=checkbox] {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    flex: 0 0 auto;
+    accent-color: var(--aqua-dark);
+    cursor: pointer;
+  }
+  .item-body { flex: 1; min-width: 0; }
+  .item-name { font-size: 0.94rem; font-weight: 600; display: block; }
+  .item-desc { font-size: 0.8rem; color: #6b939b; display: block; margin-top: 1px; }
+  .item-price {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--aqua-dark);
+    flex: 0 0 auto;
+    padding-top: 2px;
+  }
+  .qty {
+    width: 54px !important;
+    padding: 5px 6px !important;
+    border-radius: 9px !important;
+    font-size: 0.86rem !important;
+    text-align: center;
+    flex: 0 0 auto;
+  }
+  .qty-wrap { display: flex; align-items: center; gap: 6px; flex: 0 0 auto; padding-top: 1px; }
+  .qty-wrap.is-hidden { visibility: hidden; }
+  .qty-label { font-size: 0.72rem; color: #8aabb2; }
+
+  .total-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--aqua-light);
+    border: 2px solid var(--aqua);
+    border-radius: 14px;
+    padding: 12px 16px;
+    margin-top: 12px;
+    font-weight: 700;
+  }
+  .total-bar .total-value { color: var(--aqua-dark); font-size: 1.15rem; }
+
   button {
     width: 100%;
     padding: 14px;
@@ -127,16 +214,48 @@
   }
   .status.ok { color: #2f9e6e; }
   .status.err { color: #d9534f; }
+
+  /* ---------- Payment / terms block ---------- */
+  .terms {
+    background: #fff7fa;
+    border: 2px dashed var(--pink);
+    border-radius: 16px;
+    padding: 16px 18px;
+    margin-top: 4px;
+    font-size: 0.87rem;
+    line-height: 1.55;
+    color: #5a4048;
+  }
+  .terms strong { color: var(--ink); }
+  .terms .zelle {
+    display: inline-block;
+    background: var(--ink);
+    color: #fff;
+    border-radius: 8px;
+    padding: 2px 9px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+  }
+
   @media (max-width: 560px) {
     .row { flex-direction: column; gap: 0; }
+    .announce { font-size: 0.82rem; }
   }
 </style>
 </head>
 <body>
   <div class="card">
+
+    <!-- ===== Top announcement ===== -->
+    <div class="announce">
+      <div class="line">🫣 <span class="accent">Orders Close:</span> Wed, 10/28 @ 12pm</div>
+      <div class="line"><span class="accent">Alameda Pick-up:</span> Thurs, 10/29 PM</div>
+    </div>
+
     <div class="header">
       <div class="dog-wrap">
-        <img class="dog-img" src="https://imgs.search.brave.com/XQXbgzBeB8RKJDToRdeeDiryldGHNKXfkGG2NjGk-aA/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wNjEv/ODk4LzU5MS9zbWFs/bC9hZG9yYWJsZS1i/aWNob24tZnJpc2Ut/ZG9nLWhlYWQtY2xp/cGFydC1mbHVmZnkt/cHVwLWFydC1mb3It/cGV0LWxvdmVycy1j/cmVhdGl2ZS1wcm9q/ZWN0cy12ZWN0b3Iu/anBn" alt="White bichon dog head">
+        <img class="dog-img" src="dog.jpg" alt="White bichon dog head">
       </div>
       <h1>Chub Chub Cafe</h1>
       <p><span class="matcha" title="Matcha">🍵</span> Homemade with love 🍰</p>
@@ -154,12 +273,12 @@
         <input type="tel" name="Phone" required placeholder="(123) 456-7890">
       </div>
 
-      <div class="field">
-        <label>When do you need it by? <span class="req">*</span></label>
-        <input type="datetime-local" name="Needed By" required>
-      </div>
-
       <div class="row">
+        <div class="field">
+          <label>City you're ordering from <span class="req">*</span></label>
+          <input type="text" name="City" required placeholder="e.g. Alameda">
+          <div class="note">Helps us plan pick-up &amp; demographics.</div>
+        </div>
         <div class="field">
           <label>Occasion</label>
           <select name="Occasion">
@@ -173,26 +292,46 @@
             <option>Other</option>
           </select>
         </div>
-        <div class="field">
-          <label>Number of People <span class="req">*</span></label>
-          <input type="number" name="Number of People" min="1" required placeholder="e.g. 12">
-        </div>
       </div>
 
       <div class="field">
-        <label>Item(s) <span class="req">*</span></label>
-        <textarea name="Items" required placeholder="e.g. 1 dozen chocolate chip cookies, 1 vanilla birthday cake (10\")"></textarea>
-        <div class="note">Describe what you'd like, flavors, sizes, and quantities.</div>
+        <label>Items <span class="req">*</span></label>
+        <div class="menu" id="menu">
+          <!-- MENU_PLACEHOLDER: replace this block with Kat's menu + prices -->
+          <div class="menu-group">
+            <div class="menu-group-title">Menu coming soon</div>
+            <label class="item">
+              <input type="checkbox" name="Items" value="Sample item" data-price="0">
+              <span class="item-body">
+                <span class="item-name">Sample item</span>
+                <span class="item-desc">Placeholder — waiting on Kat's menu pricing</span>
+              </span>
+              <span class="item-price">$0</span>
+            </label>
+          </div>
+          <!-- /MENU_PLACEHOLDER -->
+        </div>
+        <div class="total-bar">
+          <span>Estimated total</span>
+          <span class="total-value" id="total">$0.00</span>
+        </div>
+        <div class="note">Check everything you'd like. We'll confirm quantities &amp; final price by text. Anything not listed goes in Special Requests.</div>
       </div>
 
       <div class="field">
         <label>Special Requests / Allergies</label>
-        <textarea name="Special Requests" placeholder="Allergies, dietary needs, custom message, etc."></textarea>
+        <textarea name="Special Requests" placeholder="Allergies, dietary needs, custom message, items not on the menu, etc."></textarea>
       </div>
 
       <button type="submit">Send Order 💌</button>
-      <div class="footer">We'll confirm your order by phone. Thank you! 🥐</div>
       <div class="status" id="status" role="status"></div>
+
+      <!-- ===== Bottom terms ===== -->
+      <div class="terms">
+        <strong>All orders and payment must be submitted by 10/28 @ 12noon.</strong><br>
+        Payment can be sent via Zelle <span class="zelle">310-367-1734</span><br>
+        We'll confirm your order &amp; pick-up location via text after receiving payment.
+      </div>
     </form>
   </div>
 
@@ -200,6 +339,38 @@
   // 👇 Paste your deployed Google Apps Script Web App URL here (after setup)
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxq2E7C3NzUb0V8bZo9g5q8VunEcGmdw2rx8ff8NbuJ0TZwOA1Hepk1DQU4_EFd47yU/exec";
 
+  /* ---------- Live estimated total ---------- */
+  function updateTotal() {
+    var total = 0;
+    document.querySelectorAll('#menu input[type=checkbox]').forEach(function (cb) {
+      var price = parseFloat(cb.dataset.price || "0");
+      var qtyInput = cb.closest('.item').querySelector('.qty');
+      var qty = qtyInput ? Math.max(1, parseInt(qtyInput.value || "1", 10)) : 1;
+      if (cb.checked) total += price * qty;
+    });
+    document.getElementById('total').textContent = '$' + total.toFixed(2);
+    return total;
+  }
+
+  document.getElementById('menu').addEventListener('change', function (e) {
+    var item = e.target.closest('.item');
+    if (!item) return;
+    var cb = item.querySelector('input[type=checkbox]');
+    var qtyWrap = item.querySelector('.qty-wrap');
+    var qtyInput = item.querySelector('.qty');
+
+    if (cb && qtyWrap) {
+      qtyWrap.classList.toggle('is-hidden', !cb.checked);
+      if (cb.checked && qtyInput && qtyInput.value === '0') qtyInput.value = '1';
+    }
+    updateTotal();
+  });
+
+  document.getElementById('menu').addEventListener('input', function (e) {
+    if (e.target.classList.contains('qty')) updateTotal();
+  });
+
+  /* ---------- Submit ---------- */
   document.getElementById("orderForm").addEventListener("submit", function (e) {
     e.preventDefault();
     const f = e.target;
@@ -207,13 +378,23 @@
     const status = document.getElementById("status");
     const btn = f.querySelector("button[type=submit]");
 
+    // Collect checked items, e.g. "2 × Chocolate Chip Cookies ($12.00)"
+    const picked = [];
+    document.querySelectorAll('#menu input[type=checkbox]:checked').forEach(function (cb) {
+      const item = cb.closest('.item');
+      const qtyInput = item.querySelector('.qty');
+      const qty = qtyInput ? Math.max(1, parseInt(qtyInput.value || "1", 10)) : 1;
+      const price = parseFloat(cb.dataset.price || "0");
+      const label = cb.value;
+      picked.push(qty + " × " + label + " ($" + (price * qty).toFixed(2) + ")");
+    });
+
     const data = {
       name: get("Name"),
       phone: get("Phone"),
-      neededBy: get("Needed By"),
+      neededBy: "City: " + get("City"),
       occasion: get("Occasion"),
-      people: get("Number of People"),
-      items: get("Items"),
+      items: picked.join("; ") + " — Total $" + updateTotal().toFixed(2),
       special: get("Special Requests")
     };
 
@@ -231,9 +412,11 @@
       .then(function () {
         btn.disabled = false;
         btn.textContent = "Send Order 💌";
-        status.textContent = "Order sent! We'll be in touch soon. 🧁";
+        status.textContent = "Order sent! We'll text you to confirm. 🧁";
         status.className = "status ok";
         f.reset();
+        document.querySelectorAll('#menu .qty-wrap').forEach(function (w) { w.classList.add('is-hidden'); });
+        updateTotal();
       })
       .catch(function () {
         btn.disabled = false;
@@ -242,6 +425,8 @@
         status.className = "status err";
       });
   });
+
+  updateTotal();
 </script>
 </body>
 </html>
