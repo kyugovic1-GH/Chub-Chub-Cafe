@@ -50,7 +50,7 @@
   .announce .accent { color: var(--aqua); }
 
   .header {
-    background: var(--aqua);
+    background: #8f99fb;
     padding: 26px 28px;
     text-align: center;
     position: relative;
@@ -58,31 +58,30 @@
   .header h1 {
     font-size: 1.9rem;
     letter-spacing: 0.5px;
-    color: #fff;
-    text-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    color: #F0FFF0;
+    text-shadow: none;
   }
   .header p {
-    color: #eaf9fc;
+    color: #F0FFF0;
     margin-top: 6px;
     font-size: 0.95rem;
   }
-  .cupcake { font-size: 1.6rem; margin-top: 8px; display: inline-block; }
   .dog-wrap {
     position: absolute;
     top: 14px;
     right: 16px;
     width: 68px;
-    height: 68px;
+    height: 100px;
   }
   .dog-img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
+    object-fit: contain;
+    border-radius: 10px;
     border: 3px solid #fff;
     box-shadow: 0 3px 8px rgba(0,0,0,0.18);
+    background: #fff;
   }
-  .matcha { font-size: 1.15rem; margin-right: 2px; }
 
   form { padding: 26px 28px 30px; }
   .field { margin-bottom: 18px; }
@@ -123,8 +122,8 @@
   }
   .menu-group + .menu-group { border-top: 1px solid #eaf5f8; }
   .menu-group-title {
-    background: var(--aqua-light);
-    color: var(--aqua-dark);
+    background: #8f99fb;
+    color: #F0FFF0;
     font-size: 0.78rem;
     font-weight: 700;
     letter-spacing: 0.8px;
@@ -133,7 +132,7 @@
   }
   .item {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 10px;
     padding: 10px 13px;
     cursor: pointer;
@@ -141,14 +140,6 @@
   }
   .item + .item { border-top: 1px solid #f2f9fb; }
   .item:hover { background: #f7fcfe; }
-  .item input[type=checkbox] {
-    width: 18px;
-    height: 18px;
-    margin-top: 2px;
-    flex: 0 0 auto;
-    accent-color: var(--aqua-dark);
-    cursor: pointer;
-  }
   .item-body { flex: 1; min-width: 0; }
   .item-name { font-size: 0.94rem; font-weight: 600; display: block; }
   .item-desc { font-size: 0.8rem; color: #6b939b; display: block; margin-top: 1px; }
@@ -167,15 +158,35 @@
     text-align: center;
     flex: 0 0 auto;
   }
-  .qty-wrap { display: flex; align-items: center; gap: 6px; flex: 0 0 auto; padding-top: 1px; }
-  .qty-wrap.is-hidden { visibility: hidden; }
   .qty-label { font-size: 0.72rem; color: #8aabb2; }
+  .qty-select {
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--aqua-dark);
+    background: #fff;
+    border: 2px solid #cfe9ef;
+    border-radius: 8px;
+    padding: 5px 18px 5px 7px;
+    width: 40px;
+    min-width: 0;
+    cursor: pointer;
+    flex: 0 0 auto;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%230f6b7d' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 4px center;
+    background-size: 10px 6px;
+  }
+  .qty-select:focus { outline: 2px solid var(--aqua); outline-offset: 1px; }
 
   .total-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: var(--aqua-light);
+    background: #8f99fb;
     border: 2px solid var(--aqua);
     border-radius: 14px;
     padding: 12px 16px;
@@ -189,15 +200,15 @@
     padding: 14px;
     font-size: 1.05rem;
     font-weight: 700;
-    color: #fff;
-    background: var(--aqua-dark);
+    color: #F0FFF0;
+    background: #8f99fb;
     border: none;
     border-radius: 14px;
     cursor: pointer;
     letter-spacing: 0.4px;
     transition: background 0.15s, transform 0.05s;
   }
-  button:hover { background: #2393aa; }
+  button:hover { background: #7a85f9; }
   button:active { transform: scale(0.99); }
   .footer {
     text-align: center;
@@ -255,11 +266,10 @@
 
     <div class="header">
       <div class="dog-wrap">
-        <img class="dog-img" src="dog.jpg" alt="White bichon dog head">
+        <img class="dog-img" src="logo.png" alt="Chub Chub Cafe logo">
       </div>
       <h1>Chub Chub Cafe</h1>
-      <p><span class="matcha" title="Matcha">🍵</span> Homemade with love 🍰</p>
-      <span class="cupcake">🧁</span>
+      <p>Homemade with love</p>
     </div>
 
     <form id="orderForm">
@@ -268,59 +278,73 @@
         <input type="text" name="Name" required placeholder="Your name">
       </div>
 
-      <div class="field">
-        <label>Phone Number <span class="req">*</span></label>
-        <input type="tel" name="Phone" required placeholder="(123) 456-7890">
-      </div>
-
       <div class="row">
+        <div class="field">
+          <label>Phone Number <span class="req">*</span></label>
+          <input type="tel" name="Phone" required placeholder="(123) 456-7890">
+        </div>
         <div class="field">
           <label>City you're ordering from <span class="req">*</span></label>
           <input type="text" name="City" required placeholder="e.g. Alameda">
-          <div class="note">Helps us plan pick-up &amp; demographics.</div>
-        </div>
-        <div class="field">
-          <label>Occasion</label>
-          <select name="Occasion">
-            <option value="">— Select —</option>
-            <option>Birthday</option>
-            <option>Wedding</option>
-            <option>Anniversary</option>
-            <option>Baby Shower</option>
-            <option>Holiday</option>
-            <option>Just Because</option>
-            <option>Other</option>
-          </select>
         </div>
       </div>
 
       <div class="field">
         <label>Items <span class="req">*</span></label>
         <div class="menu" id="menu">
-          <!-- MENU_PLACEHOLDER: replace this block with Kat's menu + prices -->
           <div class="menu-group">
-            <div class="menu-group-title">Menu coming soon</div>
-            <label class="item">
-              <input type="checkbox" name="Items" value="Sample item" data-price="0">
+            <div class="menu-group-title">Menu</div>
+            <label class="item" for="qty-inari">
               <span class="item-body">
-                <span class="item-name">Sample item</span>
-                <span class="item-desc">Placeholder — waiting on Kat's menu pricing</span>
+                <span class="item-name">Inari</span>
               </span>
-              <span class="item-price">$0</span>
+              <select class="qty-select" id="qty-inari" name="Inari" data-item="Inari">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </label>
+            <label class="item" for="qty-levain">
+              <span class="item-body">
+                <span class="item-name">Levain Cookie</span>
+              </span>
+              <select class="qty-select" id="qty-levain" name="Levain Cookie" data-item="Levain Cookie">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </label>
+            <label class="item" for="qty-ube">
+              <span class="item-body">
+                <span class="item-name">Ube Crinkle Cookie</span>
+              </span>
+              <select class="qty-select" id="qty-ube" name="Ube Crinkle Cookie" data-item="Ube Crinkle Cookie">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
             </label>
           </div>
-          <!-- /MENU_PLACEHOLDER -->
         </div>
         <div class="total-bar">
           <span>Estimated total</span>
           <span class="total-value" id="total">$0.00</span>
         </div>
-        <div class="note">Check everything you'd like. We'll confirm quantities &amp; final price by text. Anything not listed goes in Special Requests.</div>
+        <div class="note">Choose a quantity for each item. We'll confirm final price by text.</div>
       </div>
 
       <div class="field">
         <label>Special Requests / Allergies</label>
-        <textarea name="Special Requests" placeholder="Allergies, dietary needs, custom message, items not on the menu, etc."></textarea>
+        <textarea name="Special Requests" placeholder="Allergies, dietary needs, custom message, etc."></textarea>
       </div>
 
       <button type="submit">Send Order 💌</button>
@@ -340,34 +364,21 @@
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxq2E7C3NzUb0V8bZo9g5q8VunEcGmdw2rx8ff8NbuJ0TZwOA1Hepk1DQU4_EFd47yU/exec";
 
   /* ---------- Live estimated total ---------- */
+  /* Prices are 0 until Kat confirms them — set PRICES below to enable totals. */
+  var PRICES = { "Inari": 0, "Levain Cookie": 0, "Ube Crinkle Cookie": 0 };
+
   function updateTotal() {
     var total = 0;
-    document.querySelectorAll('#menu input[type=checkbox]').forEach(function (cb) {
-      var price = parseFloat(cb.dataset.price || "0");
-      var qtyInput = cb.closest('.item').querySelector('.qty');
-      var qty = qtyInput ? Math.max(1, parseInt(qtyInput.value || "1", 10)) : 1;
-      if (cb.checked) total += price * qty;
+    document.querySelectorAll('#menu .qty-select').forEach(function (sel) {
+      var qty = parseInt(sel.value || "0", 10) || 0;
+      total += (PRICES[sel.dataset.item] || 0) * qty;
     });
     document.getElementById('total').textContent = '$' + total.toFixed(2);
     return total;
   }
 
   document.getElementById('menu').addEventListener('change', function (e) {
-    var item = e.target.closest('.item');
-    if (!item) return;
-    var cb = item.querySelector('input[type=checkbox]');
-    var qtyWrap = item.querySelector('.qty-wrap');
-    var qtyInput = item.querySelector('.qty');
-
-    if (cb && qtyWrap) {
-      qtyWrap.classList.toggle('is-hidden', !cb.checked);
-      if (cb.checked && qtyInput && qtyInput.value === '0') qtyInput.value = '1';
-    }
-    updateTotal();
-  });
-
-  document.getElementById('menu').addEventListener('input', function (e) {
-    if (e.target.classList.contains('qty')) updateTotal();
+    if (e.target.classList.contains('qty-select')) updateTotal();
   });
 
   /* ---------- Submit ---------- */
@@ -378,22 +389,22 @@
     const status = document.getElementById("status");
     const btn = f.querySelector("button[type=submit]");
 
-    // Collect checked items, e.g. "2 × Chocolate Chip Cookies ($12.00)"
+    // Collect selected quantities, e.g. "2 × Inari"
     const picked = [];
-    document.querySelectorAll('#menu input[type=checkbox]:checked').forEach(function (cb) {
-      const item = cb.closest('.item');
-      const qtyInput = item.querySelector('.qty');
-      const qty = qtyInput ? Math.max(1, parseInt(qtyInput.value || "1", 10)) : 1;
-      const price = parseFloat(cb.dataset.price || "0");
-      const label = cb.value;
-      picked.push(qty + " × " + label + " ($" + (price * qty).toFixed(2) + ")");
+    document.querySelectorAll('#menu .qty-select').forEach(function (sel) {
+      const qty = parseInt(sel.value || "0", 10) || 0;
+      if (qty > 0) picked.push(qty + " × " + sel.dataset.item);
     });
+    if (!picked.length) {
+      status.textContent = "Please choose at least one item.";
+      status.className = "status err";
+      return;
+    }
 
     const data = {
       name: get("Name"),
       phone: get("Phone"),
       neededBy: "City: " + get("City"),
-      occasion: get("Occasion"),
       items: picked.join("; ") + " — Total $" + updateTotal().toFixed(2),
       special: get("Special Requests")
     };
@@ -415,7 +426,7 @@
         status.textContent = "Order sent! We'll text you to confirm. 🧁";
         status.className = "status ok";
         f.reset();
-        document.querySelectorAll('#menu .qty-wrap').forEach(function (w) { w.classList.add('is-hidden'); });
+        document.querySelectorAll('#menu .qty-select').forEach(function (sel) { sel.value = '0'; });
         updateTotal();
       })
       .catch(function () {
